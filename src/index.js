@@ -1,3 +1,5 @@
+/* eslint-disable no-param-reassign, no-inner-declarations, no-return-assign */
+
 module.exports = (rawArgs, opts = { boolean: [], '--': false }) => {
   // Next two lines are for cases where user supplies either
   // boolean or ['--'], but not both. We don't want the unsupplied
@@ -15,7 +17,7 @@ module.exports = (rawArgs, opts = { boolean: [], '--': false }) => {
   // Use traditional for loop instead of for..in or for..of
   // because in some cases we want to skip an iteration,
   // which we do by incrementing i
-  for (let i = 0; i < args.length; i++) {
+  for (let i = 0; i < args.length; i += 1) {
     const arg = args[i];
 
     function setToNextOrTrue(optName) {
@@ -23,7 +25,7 @@ module.exports = (rawArgs, opts = { boolean: [], '--': false }) => {
         argv[optName] = true;
       } else if (args[i + 1] && !args[i + 1].match(/^-/)) {
         argv[optName] = args[i + 1];
-        i++;
+        i += 1;
       } else {
         argv[optName] = true;
       }
@@ -39,11 +41,11 @@ module.exports = (rawArgs, opts = { boolean: [], '--': false }) => {
       setToNextOrTrue(lastLetter);
     } else if (arg.match(/^--[^-]+/)) {
       const optName = arg.slice(2);
-      setToNextOrTrue(optName)
+      setToNextOrTrue(optName);
     } else {
       argv._.push(arg);
     }
   }
 
   return argv;
-}
+};
