@@ -1,4 +1,4 @@
-export default (rawArgs, opts = { boolean: [], '--': false }) => {
+module.exports = (rawArgs, opts = { boolean: [], '--': false }) => {
   // Next two lines are for cases where user supplies either
   // boolean or ['--'], but not both. We don't want the unsupplied
   // one to be undefined, and the default parameter value doesn't

@@ -1,4 +1,4 @@
-var parse = require('../dist/index.js').default; // https://github.com/babel/babel/issues/2212
+var parse = require('../dist/index.js');
 var assert = require('assert');
 
 describe('Parser', function() {
