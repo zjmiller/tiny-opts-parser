@@ -1,4 +1,4 @@
-var parse = require('../dist/index.js');
+var parse = require('../dist/index');
 var assert = require('assert');
 
 describe('Parser', function() {
@@ -68,28 +68,28 @@ describe('Parser', function() {
     );
   });
 
-  it('should parse multi-letter opt w/ arg', function(){
+  it('should parse multi-letter opt w/ arg', function() {
     assert.deepEqual(
       parse(['--asdf', 'ghjk']),
       { _: [], asdf: 'ghjk' }
     );
   });
 
-  it('should parse multi-letter opt w/o arg', function(){
+  it('should parse multi-letter opt w/o arg', function() {
     assert.deepEqual(
       parse(['--asdf']),
       { _: [], asdf: true }
     );
   });
 
-  it('should allow multi-letter opt to be set to boolean', function(){
+  it('should allow multi-letter opt to be set to boolean', function() {
     assert.deepEqual(
       parse(['--asdf', 'qwer'], { boolean: ['asdf'] }),
       { _: ['qwer'], asdf: true }
     );
   });
 
-  it('should parse mixes of single- and multi-letter opts, w/ and w/o args', function(){
+  it('should parse mixes of single- and multi-letter opts, w/ and w/o args', function() {
     assert.deepEqual(
       parse(['abc', '-abc', '--asdf']),
       { _: ['abc'], a: true, b: true, c: true, asdf: true }
@@ -106,14 +106,14 @@ describe('Parser', function() {
     );
   });
 
-  it('should stop parsing opts after --', function(){
+  it('should stop parsing opts after --', function() {
     assert.deepEqual(
       parse(['-a', '-bcd', 'def', 'xyz', '--', '-g', '-hij', 'klm']),
       { _: ['xyz', '-g', '-hij', 'klm'], a: true, b: true, c: true, d: 'def' }
     );
   });
 
-  it('should allow collection of post -- args', function(){
+  it('should allow collection of post -- args', function() {
     assert.deepEqual(
       parse(['-a', '-bcd', 'def', 'xyz', '--', '-g', '-hij', 'klm'], { '--': true }),
       { _: ['xyz'], '--': ['-g', '-hij', 'klm'], a: true, b: true, c: true, d: 'def' }
