@@ -16,7 +16,7 @@ module.exports = (rawArgs, rawOpts = {}) => {
 
   // Cycle through arguments
   // Use traditional for loop instead of for..in or for..of
-  // because in some cases we want to skip an iteration,
+  // because in some cases we want to skip an iteration
   // which we do by incrementing i
   for (let i = 0; i < args.length; i += 1) {
     const arg = args[i];
@@ -27,7 +27,7 @@ module.exports = (rawArgs, rawOpts = {}) => {
         argv[optName] = true;
       }
 
-      // Else if next arg exists && doesn't start w/ `-`,
+      // Else if next arg exists && doesn't start w/ `-`
       // set optName to next arg
       else if (args[i + 1] && !args[i + 1].match(/^-/)) {
         argv[optName] = args[i + 1];
@@ -42,8 +42,8 @@ module.exports = (rawArgs, rawOpts = {}) => {
     }
 
     // If arg is just `--`
-    // Remainder of args just get pushed to argv._
-    // Or argv['--'], if specified in parser options
+    // remainder of args just get pushed to argv._
+    // or argv['--'], if specified in parser options
     if (arg.match(/^--$/)) {
       if (opts['--']) argv['--'].push(...args.slice(i + 1));
       else argv._.push(...args.slice(i + 1));
@@ -51,7 +51,7 @@ module.exports = (rawArgs, rawOpts = {}) => {
     }
 
     // If arg starts w/ `-`
-    // This is either one or multiple single-letter opts
+    // this is either one or multiple single-letter opts
     else if (arg.match(/^-[^-]+/)) {
       arg.slice(1, -1).split('').forEach(letter => argv[letter] = true);
       const lastLetter = arg.slice(-1);
@@ -59,13 +59,13 @@ module.exports = (rawArgs, rawOpts = {}) => {
     }
 
     // If arg starts w/ `--`
-    // This is one multi-letter option
+    // this is one multi-letter option
     else if (arg.match(/^--[^-]+/)) {
       const optName = arg.slice(2);
       setToNextOrTrue(optName);
     }
 
-    // If positional argument, just push to argv._
+    // If positional argument, push to argv._
     else {
       argv._.push(arg);
     }
