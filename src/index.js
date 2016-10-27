@@ -1,10 +1,11 @@
-/* eslint-disable no-param-reassign, no-inner-declarations, no-return-assign */
+/* eslint-disable no-inner-declarations, no-return-assign */
 
-module.exports = (rawArgs, opts = { boolean: [], '--': false }) => {
-  // Next two lines are for cases where user supplies either
-  // boolean or ['--'], but not both. We don't want the unsupplied
-  // one to be undefined, and the default parameter value doesn't
-  // kick in because the user supplied an opts hash.
+module.exports = (rawArgs, rawOpts = {}) => {
+  const defaultOpts = {
+    boolean: [],
+    '--': false,
+  };
+  const opts = Object.assign({}, defaultOpts, rawOpts);
   if (opts.boolean === undefined) opts.boolean = [];
   if (opts['--'] === undefined) opts['--'] = false;
 
