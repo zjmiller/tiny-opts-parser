@@ -6,8 +6,6 @@ module.exports = (rawArgs, rawOpts = {}) => {
     '--': false,
   };
   const opts = Object.assign({}, defaultOpts, rawOpts);
-  if (opts.boolean === undefined) opts.boolean = [];
-  if (opts['--'] === undefined) opts['--'] = false;
 
   const args = rawArgs.map(String);
   const argv = {};
