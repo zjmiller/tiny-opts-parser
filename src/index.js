@@ -21,6 +21,11 @@ module.exports = (rawArgs, rawOpts = {}) => {
   for (let i = 0; i < args.length; i += 1) {
     const arg = args[i];
 
+    // This function is nested in for-loop
+    // so that it has access to i
+    // which it uses to access the next arg
+    // and which it increments
+    // if next arg is value for optName
     function setToNextOrTrue(optName) {
       // If user specified optName as boolean, set to true
       if (opts.boolean.indexOf(optName) > -1) {
