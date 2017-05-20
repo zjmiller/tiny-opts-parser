@@ -7,7 +7,7 @@
     "build": "npm run transpile && npm run uglify",
     "lint": "eslint src/index.js; exit 0",
     "prepublish": "npm run build",
-    "test": "npm run lint && mocha",
+    "test": "npm run lint && ttr",
     "transpile": "babel src/index.js -o dist/index.js",
     "uglify": "uglifyjs dist/index.js --compress --mangle -o dist/index.js",
     "watch": "babel src --watch -d dist"
